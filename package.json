@@ -1,0 +1,22 @@
+{
+  "name": "openathon",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-scripts": "1.1.5",
+    "extends": "react-app"
+  },
+  "scripts": {
+    "build": "concurrently \"npm run sass:build\" \"react-scripts build\"",
+    "eject": "react-scripts eject",
+    "sass:watch": "node-sass -w src -o src --output-style compressed --include-path src",
+    "sass:build": "node-sass src -o src --output-style compressed --include-path src",
+    "start": "concurrently --kill-others \"npm run sass:watch\" \"react-scripts start\"",
+    "test": "react-scripts test --env=jsdom"
+},
+  "devDependencies": {
+    "node-sass": "^6.0.1"
+  }
+}

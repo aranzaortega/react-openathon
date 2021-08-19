@@ -1,0 +1,11 @@
+/* Footer.scss */
+
+@import 'assets/styles/common/variables';
+
+.Footer {
+    padding: $space-s $space-m;
+    border-top: 1px solid $border-color;
+    font-size: $font-s;
+    text-align: center;
+}
+
