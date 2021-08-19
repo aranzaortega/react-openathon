@@ -2,6 +2,7 @@
 import React from 'react';
 import './Header.css';
 import { Menu } from '../../components';
+import propTypes from 'prop-types';
 
 class Header extends React.Component {
     render() {
@@ -17,6 +18,10 @@ class Header extends React.Component {
         </div>
         );
     }
+}
+
+Header.propTypes = {
+    logo: propTypes.string
 }
     
 export default Header;
