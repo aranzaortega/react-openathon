@@ -1,0 +1,9 @@
+/* Main.scss */
+
+@import 'assets/styles/common/variables';
+
+.Main {
+    padding: 2.5rem 0;
+    background: $light-gray;
+    text-align: center;
+}
