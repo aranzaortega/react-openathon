@@ -1,13 +1,14 @@
 /* ListBasic.jsx */
 
 import React from 'react';
-import './ListBasic.css';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import './ListBasic.css';
 
 const defaultProps = {
     title: null,
     data: null,
-    fields: ['name', 'description', 'image'],
+    fields: ['name', 'description', 'image', 'internal_link'],
     layout: 'list'
 };
 
@@ -21,12 +22,17 @@ class ListBasic extends React.PureComponent {
                             <h2>{this.props.title}</h2>
                         </header>
                     }
-                    
                     <section className={`ListBasic--${this.props.layout}`}>
                         {this.props.data && this.props.data.map((item) => {
                             return (
                                 <article key={`service-${item.id}`}
                                     className="ListBasic__item">
+                                    {this.props.fields.includes('internal_link') && this.props.url &&
+                                        <Link className="ListBasic__link--internal"
+                                            to={`${this.props.url}${item.id}`}>
+                                            <i className="ListBasic__link__icon"></i>
+                                        </Link>
+                                    }
                                     {this.props.fields.includes('image') &&
                                         <div className="ListBasic__image">
                                             {item.image_link &&
@@ -50,7 +56,6 @@ class ListBasic extends React.PureComponent {
                             );
                         })}
                     </section>
-
                 </div>
             </div>
         );
