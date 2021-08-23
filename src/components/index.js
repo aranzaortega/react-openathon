@@ -8,6 +8,7 @@ import Notification from './Notification/Notification';
 import Info from './Info/Info';
 import ListBasic from './ListBasic/ListBasic';
 import ListItemDetail from './ListItemDetail/ListItemDetail';
+import Form from './Form/Form';
 
 export {
     Header,
@@ -17,5 +18,6 @@ export {
     Notification,
     Info,
     ListBasic,
-    ListItemDetail
+    ListItemDetail,
+    Form
 };
