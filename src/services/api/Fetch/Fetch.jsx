@@ -35,6 +35,16 @@ class Fetch extends React.Component {
         }
     }
 
+    getRequestConfig(props) {
+        return Object.assign({ baseURL: props.baseURL, url: props.url, method: props.method, data: props.data, params: props.params }, props.config)
+    }
+
+    onReload(props) {
+        if (!this.state.loading) {
+            this.fetchData(this.getRequestConfig(props ? Object.assign({}, this.props, props) : this.props));
+        }
+    }
+
     componentDidMount() {
         if (this.props.fetchAfterMount) this.fetchData();
     }

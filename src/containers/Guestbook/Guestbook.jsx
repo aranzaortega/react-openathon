@@ -1,23 +1,17 @@
 /* Guestbook.jsx */
-
 import React from 'react';
-import { Form } from '../../components'
-import './Guestbook.css'
+import { Form, Loader, Notification } from '../../components';
+import { Get }from '../../services/api';
+import './Guestbook.css';
 
 class Guestbook extends React.Component {
 
     constructor(props){
         super(props);
         this.state = {
-            entries: []
+            entry: null,
+            action: null,
         }
-        this.submitForm = this.submitForm.bind(this);
-    }
-
-    submitForm(newEntry) {
-        const entries = this.state.entries;
-        entries.push(newEntry);
-        this.setState({ entries });
     }
 
     render() {
@@ -29,34 +23,57 @@ class Guestbook extends React.Component {
                 <section className="Guestbook__content">
                     <Form className="Guestbook__form"
                         title="Guestbook Form"
-                        submitForm={this.submitForm}
+                        requestUrl="guestbook"
                     />
-                    {this.state.entries.length > 0 ?
-                    <div className="Guestbook__entries">
-                        <header>
-                            <h3>Guestbook Entries</h3>
-                        </header>
-                        <section>
-                            {this.state.entries.map((entry, i) => {
-                                return(
-                                    <article key={`entry-${i}`}
-                                        className="Guestbook__entry"
-                                    >
-                                        {Object.keys(entry).map(key => {
-                                            return (
-                                            <p key={`entry-${i}-${key}`}>{entry[key]}</p>
-                                            );
-                                        })}
-                                    </article>
-                                );
-                            })}
-                        </section>
-                    </div>
-                    : <div className="Guestbook__entries Guestbook__entries--empty">
-                        <p>No entries yet</p>
-                    </div>
-                    }
-
+                    <Get url="guestbook" fetchAfterMount>
+                        {({ data, loading, error, onReload }) => {
+                            return (
+                                <section className="Guestbook__entries">
+                                <header>
+                                    <h3>Guestbook Entries</h3>
+                                </header>
+                                    <button className="Guestbook__refresh button"
+                                        onClick={() => onReload({ params:{ refresh: true } })}>
+                                        Refresh
+                                    </button>
+                                    {error &&
+                                        <Notification type="error"
+                                            message= {error.message}
+                                        />
+                                    }
+                                    {loading &&
+                                        <Loader />
+                                    }
+                                    {data && data.length > 0 ?
+                                        <article>
+                                            {data.map((entry, i) => {
+                                                return(
+                                                    <article key={`entry-${i}`}
+                                                        className="Guestbook__entry"
+                                                    >
+                                                        {Object.keys(entry).map(key => {
+                                                            return (
+                                                                <div key={`entry-${i}-${key}`}>
+                                                                {(key !== 'id') &&
+                                                                    <p className={`Guestbook__entry__${key}`}>
+                                                                        {entry[key]}
+                                                                    </p>
+                                                                }
+                                                                </div>
+                                                            );
+                                                        })}
+                                                    </article>
+                                                );
+                                            })}
+                                        </article>
+                                        : <div className="Guestbook__entries--empty">
+                                            <p>No entries yet</p>
+                                        </div>
+                                    }
+                                </section>
+                            );
+                        }}
+                    </Get>
                 </section>
             </div>
         );
@@ -64,3 +81,4 @@ class Guestbook extends React.Component {
 }
 
 export default Guestbook;
+

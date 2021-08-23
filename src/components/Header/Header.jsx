@@ -1,8 +1,8 @@
 /* Header.jsx */
 import React from 'react';
 import { Menu, Loader, Notification } from '../../components';
-import { Fetch } from '../../services/api';
 import './Header.css';
+import { Get } from '../../services/api';
 
 class Header extends React.Component {
     render() {
@@ -10,7 +10,7 @@ class Header extends React.Component {
             <div className="Header">
                 <div className="Header__logo">
                     {
-                    <Fetch url="general" method="get">
+                    <Get url="general" fetchAfterMount>
                         {({ data, loading, error }) => {
                             if (error) {
                                 return (
@@ -31,7 +31,7 @@ class Header extends React.Component {
                             }
                             return <Loader />;
                         }}
-                    </Fetch>
+                    </Get>
                     }
                 </div>
                 <h1 className="Header__title">II OPENATHON Custom Open Cloud</h1>

@@ -1,7 +1,7 @@
 /* Home.jsx */
 import React from 'react';
 import { Info, ListBasic, Loader, Notification } from '../../components';
-import { Fetch } from '../../services/api';
+import { Get } from '../../services/api';
 import './Home.css';
 
 class Home extends React.Component {
@@ -9,7 +9,7 @@ class Home extends React.Component {
         return (
             <div className="Home" location={this.props.location}>
                 <div className="Home__info">
-                    <Fetch url="general" method="get">
+                    <Get url="general" method="get" fetchAfterMount>
                         {({ data, loading, error }) => {
                             if (error) {
                                 return (
@@ -28,11 +28,11 @@ class Home extends React.Component {
                             }
                             return <Loader />;
                         }}
-                    </Fetch>
+                    </Get>
                 </div>
                 <div className="Home__list">
                     <div className="Home__services">
-                        <Fetch url="services" method="get">
+                        <Get url="services" fetchAfterMount>
                             {({ data, loading, error }) => {
                                 if (error) {
                                     return (
@@ -54,10 +54,10 @@ class Home extends React.Component {
                                 }
                                 return <Loader />;
                             }}
-                        </Fetch>
+                        </Get>
                     </div>
                     <div className="Home__innovation">
-                        <Fetch url="innovation" method="get">
+                        <Get url="innovation" fetchAfterMount>
                             {({ data, loading, error }) => {
                                 if (error) {
                                     return (
@@ -80,7 +80,7 @@ class Home extends React.Component {
                                 }
                                 return <Loader />;
                             }}
-                        </Fetch>
+                        </Get>
                     </div>
                 </div>
             </div>

@@ -4,6 +4,7 @@ import { Switch, Route } from 'react-router-dom';
 import { ListBasic, ListItemDetail, Loader, Notification } from '../../components';
 import { Fetch } from '../../services/api';
 import './Services.css';
+import { Get } from '../../services/api';
 
 class Services extends React.Component {
     render() {
@@ -14,7 +15,7 @@ class Services extends React.Component {
                     <h1>Services</h1>
                 </header>
                 <div className="Services__container">
-                    <Fetch url="services" method="get">
+                    <Get url="services" fetchAfterMount>
                         {({ data, loading, error }) => {
                             if (error) {
                                 return (
@@ -65,7 +66,7 @@ class Services extends React.Component {
                             }
                             return <Loader />;
                         }}
-                    </Fetch>
+                    </Get>
                 </div>
             </div>
         );

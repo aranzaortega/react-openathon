@@ -1,7 +1,15 @@
-/*src/services/api/index.js*/
+/* index.js */
 
 import Fetch from './Fetch/Fetch';
+import FetchWrapper from './FetchWrapper/FetchWrapper';
+
+const Delete = FetchWrapper('delete');
+const Get = FetchWrapper('get');
+const Post = FetchWrapper('post');
 
 export {
-    Fetch
+    Fetch,
+    Delete,
+    Get,
+    Post
 };
