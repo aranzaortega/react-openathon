@@ -2,7 +2,6 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { ListBasic, ListItemDetail, Loader, Notification } from '../../components';
-import { Fetch } from '../../services/api';
 import './Services.css';
 import { Get } from '../../services/api';
 
